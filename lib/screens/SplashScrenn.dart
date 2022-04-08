@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:trevu_app/screens/Login.dart';
+import 'package:trevu_app/screens/Login/Login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
