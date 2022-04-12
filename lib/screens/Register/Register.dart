@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import '../../screens/Beranda.dart';
-import '../../screens/Login/Login.dart';
+import '../../routes/RouteName.dart';
 import '../../screens/Register/controller/RegisterController.dart';
 import '../../common/theme_helper.dart';
 import '../../screens/Header_Widget.dart';
@@ -224,10 +222,7 @@ class RegistrationPage extends StatelessWidget {
                             ),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => Beranda()),
-                                    (Route<dynamic> route) => false);
+                                Get.offAllNamed(RouteName.beranda);
                               }
                             },
                           ),
@@ -241,11 +236,7 @@ class RegistrationPage extends StatelessWidget {
                                 text: 'Login',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginPage()),
-                                    );
+                                    Get.toNamed(RouteName.login);
                                   },
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),

@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
+import '../../routes/RouteName.dart';
 import '../../common/myColors.dart';
 import '../../common/theme_helper.dart';
-import '../../screens/Beranda.dart';
 import '../../screens/Header_Widget.dart';
 import '../../screens/Login/controller/LoginController.dart';
-import '../../screens/Register/Forgot_password.dart';
-import '../../screens/Register/Register.dart';
 
 class LoginPage extends StatelessWidget {
   Key _formKey = GlobalKey<FormState>();
@@ -92,9 +90,7 @@ class LoginPage extends StatelessWidget {
                               alignment: Alignment.topRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => ForgotPasswordPage(),
-                                  ));
+                                  Get.toNamed(RouteName.forgot_pass);
                                 },
                                 child: Text(
                                   "Forgot your password?",
@@ -120,10 +116,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => Beranda(),
-                                ));
+                                Get.offNamed(RouteName.beranda);
                               },
                             ),
                           ),
@@ -138,12 +131,7 @@ class LoginPage extends StatelessWidget {
                                       text: "Create",
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegistrationPage(),
-                                            ),
-                                          );
+                                          Get.toNamed(RouteName.register);
                                         },
                                       style: TextStyle(
                                           color: MyColors.blueAccent,
