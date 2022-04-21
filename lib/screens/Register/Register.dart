@@ -4,15 +4,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../../routes/RouteName.dart';
-import '../../screens/Register/controller/RegisterController.dart';
+import '../../controllers/RegisterController.dart';
 import '../../common/theme_helper.dart';
 import '../../screens/Header_Widget.dart';
 
 class RegistrationPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final RegisC = Get.put(RegisterController());
-  final TextEditingController _pass = TextEditingController();
-  final TextEditingController _confirmPass = TextEditingController();
+  final RegisC = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +73,7 @@ class RegistrationPage extends StatelessWidget {
                         ),
                         Container(
                           child: TextFormField(
+                            controller: RegisC.firstName,
                             decoration: ThemeHelper().textInputDecoration(
                                 'First Name', 'Enter your first name'),
                             validator: (val) {
@@ -91,6 +90,7 @@ class RegistrationPage extends StatelessWidget {
                         ),
                         Container(
                           child: TextFormField(
+                            controller: RegisC.lastName,
                             decoration: ThemeHelper().textInputDecoration(
                                 'Last Name', 'Enter your last name'),
                           ),
@@ -99,6 +99,7 @@ class RegistrationPage extends StatelessWidget {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: RegisC.email,
                             decoration: ThemeHelper().textInputDecoration(
                                 "E-mail address", "Enter your email"),
                             keyboardType: TextInputType.emailAddress,
@@ -114,6 +115,7 @@ class RegistrationPage extends StatelessWidget {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: RegisC.phone,
                             decoration: ThemeHelper().textInputDecoration(
                                 "Phone Number", "Enter your phone number"),
                             keyboardType: TextInputType.phone,
@@ -129,7 +131,7 @@ class RegistrationPage extends StatelessWidget {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
-                            controller: _pass,
+                            controller: RegisC.pass,
                             obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
                                 "Password*", "Enter your password"),
@@ -145,7 +147,7 @@ class RegistrationPage extends StatelessWidget {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
-                            controller: _confirmPass,
+                            controller: RegisC.confirmPass,
                             obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
                                 "Re-Password*", "Confirm password"),
@@ -153,7 +155,7 @@ class RegistrationPage extends StatelessWidget {
                               if (val!.isEmpty) {
                                 return "Please Confirm your password";
                               }
-                              if (val != _pass.text)
+                              if (val != RegisC.pass.text)
                                 return 'Password Not Match';
                               return null;
                             },

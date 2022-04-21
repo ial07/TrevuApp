@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:trevu_app/screens/Login/Login.dart';
+import 'package:get/get.dart';
+import 'package:trevu_app/routes/RouteName.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,11 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _SplashScreenState() {
     new Timer(Duration(seconds: 2), () {
       setState(() {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => LoginPage(),
-            ),
-            (route) => false);
+        Get.toNamed(RouteName.login);
       });
     });
 

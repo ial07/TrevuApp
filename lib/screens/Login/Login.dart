@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
+
+import 'package:trevu_app/controllers/authController.dart';
 import '../../routes/RouteName.dart';
 import '../../common/myColors.dart';
 import '../../common/theme_helper.dart';
 import '../../screens/Header_Widget.dart';
-import '../../screens/Login/controller/LoginController.dart';
+import '../../controllers/LoginController.dart';
 
 class LoginPage extends StatelessWidget {
   Key _formKey = GlobalKey<FormState>();
-  final LoginC = Get.put(LoginController());
+  final LoginC = Get.find<LoginController>();
+  final authC = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,7 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         children: [
                           TextField(
+                            controller: LoginC.email,
                             decoration: ThemeHelper().textInputDecoration(
                               'E-mail',
                               'Enter your email',
@@ -61,6 +65,7 @@ class LoginPage extends StatelessWidget {
                                 flex: 7,
                                 child: Obx(
                                   () => TextField(
+                                    controller: LoginC.pass,
                                     obscureText: !LoginC.isVisible.value,
                                     decoration:
                                         ThemeHelper().textInputDecoration(
@@ -75,7 +80,7 @@ class LoginPage extends StatelessWidget {
                                 child: Obx(
                                   () => IconButton(
                                       onPressed: () {
-                                        LoginC.ChangeVisible();
+                                        LoginC.isVisible.toggle();
                                       },
                                       icon: LoginC.isVisible.value
                                           ? Icon(Icons.visibility)
@@ -84,7 +89,22 @@ class LoginPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 30),
+                          Row(
+                            children: <Widget>[
+                              Obx(
+                                () => Checkbox(
+                                    value: LoginC.rememberMe.value,
+                                    onChanged: (_) {
+                                      LoginC.rememberMe.toggle();
+                                    }),
+                              ),
+                              Text(
+                                "Remember Me.",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                          // SizedBox(height: 5),
                           Container(
                               margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
                               alignment: Alignment.topRight,
@@ -116,7 +136,8 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                Get.offNamed(RouteName.beranda);
+                                authC.login(LoginC.email.text, LoginC.pass.text,
+                                    LoginC.rememberMe.value);
                               },
                             ),
                           ),

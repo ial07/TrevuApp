@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:trevu_app/bindings/loginB.dart';
+import 'package:trevu_app/bindings/registerB.dart';
 import 'package:trevu_app/routes/RouteName.dart';
 
 import '../screens/Beranda.dart';
@@ -15,10 +17,12 @@ class RouteApp {
     GetPage(
       name: RouteName.login,
       page: () => LoginPage(),
+      binding: LoginB(),
     ),
     GetPage(
       name: RouteName.register,
       page: () => RegistrationPage(),
+      binding: RegisterB(),
     ),
     GetPage(
       name: RouteName.forgot_pass,
